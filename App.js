@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect } from 'react';
+import React, { useState, createContext, useContext, useEffect, useRef } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, useColorScheme, TextInput, Switch, StyleSheet, Alert } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -740,11 +740,8 @@ Object.assign(quizzes, {
       ],
       answer: 1
     }
-  ]
-});
-
-Object.assign(quizzes, {
-  '9: Starting a Small Business': [
+  ],
+'9: Starting a Small Business': [
     {
       question: '1. What is the first step in starting a business?',
       options: [
@@ -921,11 +918,7 @@ Object.assign(quizzes, {
       ],
       answer: 2
     }
-  ]
-});
-
-
-Object.assign(quizzes, {
+  ],
   '13: Enterprise Social Responsibility': [
     {
       question: '1. What does Enterprise Social Responsibility (ESR) mean?',
@@ -1138,7 +1131,6 @@ Object.assign(quizzes, {
 
 
 
-
 // === Home / Notes Screen ===
 function highlightText(text, keyword, isDark) {
   if (!keyword) return <Text style={{ color: isDark ? '#ccc' : '#333' }}>{text}</Text>;
@@ -1239,6 +1231,7 @@ function QuizScreen() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [score, setScore] = useState({});
   const [search, setSearch] = useState('');
+  const scrollRef = useRef(null); // Reference for ScrollView
   const theme = useContext(ThemeContext);
   const isDark = theme.isDark;
 
@@ -1279,6 +1272,13 @@ function QuizScreen() {
     );
   };
 
+  // Scroll to top on search change
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ y: 0, animated: true });
+    }
+  }, [search]);
+
   return (
     <View style={{ flex: 1, backgroundColor: isDark ? '#121212' : '#fff' }}>
       <View style={{ padding: 10 }}>
@@ -1296,7 +1296,8 @@ function QuizScreen() {
           }}
         />
       </View>
-      <ScrollView style={{ flex: 1, paddingHorizontal: 10 }}>
+
+      <ScrollView ref={scrollRef} style={{ flex: 1, paddingHorizontal: 10 }}>
         {filteredChapters.map((chapter, cIdx) => (
           <View key={cIdx} style={{ marginBottom: 20 }}>
             {highlightMatch(chapter, search)}
