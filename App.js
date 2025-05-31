@@ -1396,7 +1396,7 @@ function SettingsScreen() {
   return (
  <View style={[styles.center, { alignItems: 'flex-start', backgroundColor: isDark ? '#121212' : '#fff', padding: 20 }]}>
   <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 2, color: isDark ? '#aaa' : '#333' }}>About App:</Text>
-  <Text style={{ fontSize: 16, marginBottom: 10, color: isDark ? '#aaa' : '#333' }}>EpBrief is a revision app for Entrepreneurship to students. It provides organized notes, quizzes, bookmarks, and a search tool — all designed to make learning easier and faster.</Text>
+  <Text style={{ fontSize: 16, marginBottom: 10, color: isDark ? '#aaa' : '#333' }}>EpBrief — an app designed to help students revise entrepreneurship content effectively. It features organized notes by chapter, quizzes, bookmarks and search — making it a powerful tool for exam prep and quick review.</Text>
 
   <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 2, color: isDark ? '#aaa' : '#333' }}>Contact:</Text>
   <Text style={{ fontSize: 16, marginBottom: 10, color: isDark ? '#aaa' : '#333' }}>For more info and updates call or whatsapp +254799144429</Text>
